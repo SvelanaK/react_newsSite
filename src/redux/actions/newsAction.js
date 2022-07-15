@@ -1,7 +1,9 @@
-import types from '../types';
+import { createAction } from 'redux-actions';
 
-const getAllNews = () => ({
-  type: types.GET_NEWS,
-});
+import actionTypes from '../actionTypes';
 
-export default getAllNews;
+export const getNewsRequested = createAction(actionTypes.GET_NEWS_REQUESTED);
+
+export const getNewsSuccess = createAction(actionTypes.GET_NEWS_SUCCESS);
+
+export const getNewsRejected = createAction(actionTypes.GET_NEWS_REJECTED);

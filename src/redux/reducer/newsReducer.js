@@ -1,4 +1,4 @@
-import types from '../types';
+import actionTypes from '../actionTypes';
 
 const initialState = {
   allNews: [],
@@ -6,7 +6,7 @@ const initialState = {
 
 function newsReducer(state = initialState, action = {}) {
   switch (action.type) {
-    case types.SET_NEWS: {
+    case actionTypes.GET_NEWS_SUCCESS: {
       return { ...state, allNews: action.payload };
     }
     default:

@@ -1,15 +1,17 @@
 import React from 'react';
-
 import PropTypes from 'prop-types';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import { Grid } from '@mui/material';
 
-function News({ title, tag, content }) {
+import {
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Button,
+  Typography,
+  Grid,
+} from '@mui/material';
+
+function News({ elem }) {
   return (
     <Grid item xs={5} sx={{ mb: 3 }}>
       <Card>
@@ -21,13 +23,13 @@ function News({ title, tag, content }) {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            { title }
+            { elem.title }
           </Typography>
           <Typography sx={{ mb: 3 }} color="text.secondary">
-            { tag }
+            { elem.tag }
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            { content }
+            { elem.content }
           </Typography>
         </CardContent>
         <CardActions>
@@ -40,10 +42,7 @@ function News({ title, tag, content }) {
 }
 
 News.propTypes = {
-  title: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
-  tag: PropTypes.string.isRequired,
-  // key: PropTypes.integer.isRequired,
+  elem: PropTypes.string.isRequired,
 };
 
 export default News;

@@ -1,11 +1,13 @@
 import React from 'react';
 
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import { Grid } from '@mui/material';
+import {
+  Button,
+  Typography,
+  AppBar,
+  Box,
+  Toolbar,
+  Grid,
+} from '@mui/material/';
 
 function Header() {
   return (
@@ -25,11 +27,15 @@ function Header() {
                 color: 'inherit',
                 textDecoration: 'none',
               }}
-
             >
               News
             </Typography>
-            <Button color="inherit">Login</Button>
+            <Button
+              href="/login"
+              color="inherit"
+            >
+              Login
+            </Button>
           </Toolbar>
         </AppBar>
       </Box>
