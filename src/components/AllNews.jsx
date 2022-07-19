@@ -14,9 +14,10 @@ function AllNews() {
   const allNews = useSelector((state) => state.news.allNews);
   return (
     <>
-      {allNews.map((elem) => (
+      {allNews.map((news) => (
         <News
-          elem={elem}
+          news={news}
+          key={news}
         />
       )) }
     </>

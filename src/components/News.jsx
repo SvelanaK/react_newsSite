@@ -11,7 +11,7 @@ import {
   Grid,
 } from '@mui/material';
 
-function News({ elem }) {
+function News({ news }) {
   return (
     <Grid item xs={5} sx={{ mb: 3 }}>
       <Card>
@@ -23,13 +23,13 @@ function News({ elem }) {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            { elem.title }
+            { news.title }
           </Typography>
           <Typography sx={{ mb: 3 }} color="text.secondary">
-            { elem.tag }
+            { news.tag }
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            { elem.content }
+            { news.content }
           </Typography>
         </CardContent>
         <CardActions>
@@ -42,7 +42,7 @@ function News({ elem }) {
 }
 
 News.propTypes = {
-  elem: PropTypes.string.isRequired,
+  news: PropTypes.string.isRequired,
 };
 
 export default News;
