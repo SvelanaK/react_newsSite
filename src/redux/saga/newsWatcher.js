@@ -9,7 +9,7 @@ function* getNewsFetchWorker() {
     const payload = yield call(getNewsApi);
     yield put(getNewsSuccess(payload));
   } catch (e) {
-    yield put(getNewsRejected(e.massage));
+    yield put(getNewsRejected());
   }
 }
 

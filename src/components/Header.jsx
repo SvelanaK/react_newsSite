@@ -7,7 +7,7 @@ import {
   Box,
   Toolbar,
   Grid,
-} from '@mui/material/';
+} from '@mui/material';
 
 function Header() {
   return (
