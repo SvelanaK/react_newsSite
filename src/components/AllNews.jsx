@@ -17,7 +17,7 @@ function AllNews() {
       {allNews.map((news) => (
         <News
           news={news}
-          key={news}
+          key={news.id}
         />
       )) }
     </>

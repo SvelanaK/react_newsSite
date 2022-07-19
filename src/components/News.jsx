@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import {
   Card,
@@ -33,16 +34,27 @@ function News({ news }) {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button size="small">Author</Button>
+          <Link to={`/${news.userId}`} style={{ textDecoration: 'none' }}>
+            <Button>
+              { news.user.login }
+            </Button>
+          </Link>
         </CardActions>
       </Card>
     </Grid>
-
   );
 }
 
 News.propTypes = {
-  news: PropTypes.string.isRequired,
+  news: PropTypes.shape({
+    title: PropTypes.string,
+    tag: PropTypes.string,
+    content: PropTypes.string,
+    userId: PropTypes.number,
+    user: PropTypes.shape({
+      login: PropTypes.string,
+    }),
+  }).isRequired,
 };
 
 export default News;
