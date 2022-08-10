@@ -1,16 +1,13 @@
 import React from 'react';
-import { Backdrop, CircularProgress } from '@mui/material';
+import { CircularProgress, Box, Grid } from '@mui/material';
 
 function Loading() {
-  const [open] = React.useState(true);
-
   return (
-    <Backdrop
-      sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-      open={open}
-    >
-      <CircularProgress color="inherit" />
-    </Backdrop>
+    <Grid item xs={10}>
+      <Box sx={{ display: 'flex', justifyContent: 'center', mt: 40 }}>
+        <CircularProgress />
+      </Box>
+    </Grid>
   );
 }
 

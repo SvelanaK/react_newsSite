@@ -24,19 +24,19 @@ function News({ news }) {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            { news.title }
+            {news.title}
           </Typography>
           <Typography sx={{ mb: 3 }} color="text.secondary">
-            { news.tag }
+            {news.tag}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            { news.content }
+            {news.content}
           </Typography>
         </CardContent>
         <CardActions>
-          <Link to={`/${news.userId}`} style={{ textDecoration: 'none' }}>
+          <Link to={`/users/${news.userId}`} style={{ textDecoration: 'none' }}>
             <Button>
-              { news.user.login }
+              {news.user.login}
             </Button>
           </Link>
         </CardActions>
