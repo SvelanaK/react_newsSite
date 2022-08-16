@@ -12,8 +12,8 @@ import {
   Box,
 } from '@mui/material';
 
-import { loginRequested, registrationRequested } from '../../../redux/actions/authActions';
-import { loginValidationSchema, registrationValidationSchema } from '../../../constants/validationSchema';
+import { loginRequested, registrationRequested } from '../../redux/actions/authActions';
+import { loginValidationSchema, registrationValidationSchema } from '../../constants/validationSchema';
 
 const loginFields = [
   {
@@ -100,9 +100,6 @@ function Form({ type }) {
     />
   );
 
-  const regForm = registrationFields.map(componentForm);
-  const logForm = loginFields.map(componentForm);
-
   const { isAuth } = useSelector((state) => state.auth);
   if (isAuth) {
     return <Navigate replace to="/" />;
@@ -126,7 +123,9 @@ function Form({ type }) {
         }}
         onSubmit={formik.handleSubmit}
       >
-        { type === 'registration' ? regForm : logForm }
+        { type === 'registration'
+          ? registrationFields.map(componentForm)
+          : loginFields.map(componentForm) }
         <Button variant="outlined" sx={{ mb: 10 }} type="submit">Сonfirm</Button>
       </Box>
     </Grid>
