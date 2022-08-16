@@ -86,6 +86,7 @@ function Form({ type }) {
   const componentForm = (el) => (
     <TextField
       required
+      key={el.name}
       id={el.name}
       name={el.name}
       label={el.label}
@@ -133,10 +134,7 @@ function Form({ type }) {
 }
 
 Form.propTypes = {
-  type: PropTypes.shape({
-    registration: PropTypes.string,
-    login: PropTypes.string,
-  }).isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export default Form;
