@@ -22,6 +22,7 @@ const actionTypes = {
   WHOAMI_REQUESTED: 'WHOAMI_REQUESTED',
   WHOAMI_SUCCESS: 'WHOAMI_SUCCESS',
   WHOAMI_REJECTED: 'WHOAMI_REJECTED',
+
 };
 
 export default actionTypes;

@@ -16,7 +16,7 @@ import {
   logoutRejected,
   whoAmIRejected,
   whoAmISuccess,
-} from '../actions/authAction';
+} from '../actions/authActions';
 
 function* registrationWorker({ payload }) {
   try {

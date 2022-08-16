@@ -1,8 +1,9 @@
 import React from 'react';
+
 import { Grid } from '@mui/material';
 
 import Header from '../Header';
-import RegForm from './forms/RegForm';
+import Form from './forms/Form';
 
 function RegPage() {
   return (
@@ -14,7 +15,7 @@ function RegPage() {
       alignItems="center"
     >
       <Header />
-      <RegForm />
+      <Form type="registration" />
     </Grid>
   );
 }

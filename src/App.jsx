@@ -3,9 +3,9 @@ import { useDispatch } from 'react-redux';
 import { Routes, Route } from 'react-router-dom';
 
 import LoginPage from './components/UserPages/LoginPage';
-import RegPage from './components/UserPages/RegPage';
+import RegistrationPage from './components/UserPages/RegistrationPage';
 import MainPage from './components/MainPage';
-import { whoAmIRequested } from './redux/actions/authAction';
+import { whoAmIRequested } from './redux/actions/authActions';
 
 function App() {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ function App() {
     <Routes>
       <Route path="/" element={<MainPage />} />
       <Route path="/login" element={<LoginPage />} />
-      <Route path="/registration" element={<RegPage />} />
+      <Route path="/registration" element={<RegistrationPage />} />
     </Routes>
   );
 }

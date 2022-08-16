@@ -11,7 +11,9 @@ import {
   Button,
 } from '@mui/material';
 
-import { logoutRequested } from '../redux/actions/authAction';
+import { logoutRequested } from '../redux/actions/authActions';
+
+import '../App.css';
 
 function Header() {
   const { user, isAuth } = useSelector((state) => state.auth);
@@ -33,14 +35,14 @@ function Header() {
                 textDecoration: 'none',
               }}
             >
-              <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>News</Link>
+              <Link to="/" className="link">News</Link>
             </Typography>
             <Box>
               { isAuth
                 ? (
                   <>
                     <Button color="inherit">
-                      <Link to={`/users/${user.id}`} style={{ textDecoration: 'none', color: 'white' }}>Profile</Link>
+                      <Link to={`/users/${user.id}`} className="link">Profile</Link>
                     </Button>
                     <Button onClick={() => dispatch(logoutRequested())} color="inherit" sx={{ ml: 3 }}>
                       Logout
@@ -49,10 +51,10 @@ function Header() {
                 ) : (
                   <>
                     <Button color="inherit">
-                      <Link to="/registration" style={{ textDecoration: 'none', color: 'white' }}>Registration</Link>
+                      <Link to="/registration" className="link">Registration</Link>
                     </Button>
                     <Button color="inherit" sx={{ ml: 3 }}>
-                      <Link to="/login" style={{ textDecoration: 'none', color: 'white' }}>Login</Link>
+                      <Link to="/login" className="link">Login</Link>
                     </Button>
 
                   </>

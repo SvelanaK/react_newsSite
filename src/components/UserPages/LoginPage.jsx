@@ -1,8 +1,9 @@
 import React from 'react';
+
 import { Grid } from '@mui/material';
 
 import Header from '../Header';
-import LoginForm from './forms/LoginForm';
+import Form from './forms/Form';
 
 function LoginPage() {
   return (
@@ -14,7 +15,7 @@ function LoginPage() {
       alignItems="center"
     >
       <Header />
-      <LoginForm />
+      <Form type="login" />
     </Grid>
   );
 }

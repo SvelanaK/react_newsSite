@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import {
   Card,
@@ -12,7 +13,11 @@ import {
   Grid,
 } from '@mui/material';
 
+import '../App.css';
+
 function News({ news }) {
+  const { user } = useSelector((state) => state.user);
+
   return (
     <Grid item xs={5} sx={{ mb: 3 }}>
       <Card>
@@ -34,9 +39,9 @@ function News({ news }) {
           </Typography>
         </CardContent>
         <CardActions>
-          <Link to={`/users/${news.userId}`} style={{ textDecoration: 'none' }}>
+          <Link to={`/users/${news.userId}`} className="link">
             <Button>
-              {news.user.login}
+              {news.user ? news.user.login : user.login}
             </Button>
           </Link>
         </CardActions>
