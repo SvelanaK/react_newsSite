@@ -14,65 +14,23 @@ import {
 
 import { loginRequested, registrationRequested } from '../../redux/actions/authActions';
 import { loginValidationSchema, registrationValidationSchema } from '../../constants/validationSchema';
+import { registrationFields, loginFields } from '../../constants/authFields';
 
-const loginFields = [
-  {
-    name: 'login',
-    label: 'Login',
-    type: 'text',
-    style: 2,
-  },
-  {
-    name: 'password',
-    label: 'Password',
-    type: 'password',
-    style: 6,
-  },
-];
+import AlertError from '../AlertError';
+import Loading from '../Loading';
 
-const registrationFields = [
-  {
-    name: 'firstName',
-    label: 'First Name',
-    type: 'text',
-    style: 4,
-  },
-  {
-    name: 'lastName',
-    label: 'Last Name',
-    type: 'text',
-    style: 4,
-  },
-  {
-    name: 'email',
-    label: 'Email',
-    type: 'text',
-    style: 4,
-  },
-  {
-    name: 'login',
-    label: 'Login',
-    type: 'text',
-    style: 4,
-  },
-  {
-    name: 'password',
-    label: 'Password',
-    type: 'password',
-    style: 6,
-  },
-];
-
-function Form({ type }) {
+function AuthForm({ type }) {
   const dispatch = useDispatch();
   const formik = useFormik({
-    initialValues: {
-      firstName: '',
-      lastName: '',
-      login: '',
-      email: '',
-      password: '',
-    },
+    initialValues: (type === 'registration'
+      ? {
+        firstName: '',
+        lastName: '',
+        login: '',
+        email: '',
+        password: '',
+      }
+      : { login: '', password: '' }),
     validationSchema: (type === 'registration' ? registrationValidationSchema : loginValidationSchema),
     onSubmit: (payload) => {
       if (type === 'registration') {
@@ -82,6 +40,16 @@ function Form({ type }) {
       }
     },
   });
+
+  const { isAuth, loading, error } = useSelector((state) => state.auth);
+
+  if (isAuth) {
+    return <Navigate replace to="/" />;
+  }
+
+  if (loading) {
+    return <Loading />;
+  }
 
   const componentForm = (el) => (
     <TextField
@@ -100,9 +68,11 @@ function Form({ type }) {
     />
   );
 
-  const { isAuth } = useSelector((state) => state.auth);
-  if (isAuth) {
-    return <Navigate replace to="/" />;
+  let authForm = '';
+  if (type === 'registration') {
+    authForm = registrationFields;
+  } else {
+    authForm = loginFields;
   }
 
   return (
@@ -123,17 +93,16 @@ function Form({ type }) {
         }}
         onSubmit={formik.handleSubmit}
       >
-        { type === 'registration'
-          ? registrationFields.map(componentForm)
-          : loginFields.map(componentForm) }
+        { authForm.map(componentForm) }
         <Button variant="outlined" sx={{ mb: 10 }} type="submit">Сonfirm</Button>
       </Box>
+      { error ? <AlertError type="auth" /> : <Box /> }
     </Grid>
   );
 }
 
-Form.propTypes = {
+AuthForm.propTypes = {
   type: PropTypes.string.isRequired,
 };
 
-export default Form;
+export default AuthForm;

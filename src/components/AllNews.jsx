@@ -28,7 +28,7 @@ function AllNews() {
   }
 
   if (error) {
-    return <AlertError />;
+    return <AlertError type="news" />;
   }
 
   return (

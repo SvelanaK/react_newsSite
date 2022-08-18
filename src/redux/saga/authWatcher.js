@@ -1,4 +1,9 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import {
+  call,
+  put,
+  takeEvery,
+  takeLatest,
+} from 'redux-saga/effects';
 
 import {
   registrationApi,
@@ -24,7 +29,7 @@ function* registrationWorker({ payload }) {
     localStorage.setItem('cookieRefreshToken', data.accessToken);
     yield put(registrationSuccess(data));
   } catch (error) {
-    yield put(registrationRejected());
+    yield put(registrationRejected(error.response.data.message));
   }
 }
 
@@ -34,13 +39,14 @@ function* loginWorker({ payload }) {
     localStorage.setItem('cookieRefreshToken', data.accessToken);
     yield put(loginSuccess(data));
   } catch (error) {
-    yield put(loginRejected());
+    yield put(loginRejected(error.response.data.message));
   }
 }
 
 function* logoutWorker() {
   try {
     const data = yield call(logoutApi);
+    localStorage.removeItem('cookieRefreshToken');
     yield put(logoutSuccess(data));
   } catch (error) {
     yield put(logoutRejected());
@@ -57,7 +63,7 @@ function* whoAmIWorker() {
 }
 
 function* authWatcher() {
-  yield takeEvery(actionTypes.REGISTRATION_REQUESTED, registrationWorker);
+  yield takeLatest(actionTypes.REGISTRATION_REQUESTED, registrationWorker);
   yield takeEvery(actionTypes.LOGIN_REQUESTED, loginWorker);
   yield takeEvery(actionTypes.LOGOUT_REQUESTED, logoutWorker);
   yield takeEvery(actionTypes.WHOAMI_REQUESTED, whoAmIWorker);

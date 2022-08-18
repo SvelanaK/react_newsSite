@@ -11,7 +11,7 @@ export async function loginApi(body) {
 }
 
 export async function logoutApi() {
-  const { data } = await instance.post('api/auth/logout');
+  const data = await instance.post('api/auth/logout');
   return data;
 }
 

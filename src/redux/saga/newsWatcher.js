@@ -1,4 +1,4 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 
 import getNewsApi from '../../api/newsApi';
 import { refreshApi } from '../../api/authApi';
@@ -21,7 +21,7 @@ function* getNewsFetchWorker() {
 }
 
 function* newsWatcher() {
-  yield takeEvery(actionTypes.GET_NEWS_REQUESTED, getNewsFetchWorker);
+  yield takeLatest(actionTypes.GET_NEWS_REQUESTED, getNewsFetchWorker);
 }
 
 export default newsWatcher;

@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import AuthPage from './components/forms/AuthPage';
 import MainPage from './components/MainPage';
+
 import { whoAmIRequested } from './redux/actions/authActions';
 
 function App() {

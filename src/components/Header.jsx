@@ -16,7 +16,7 @@ import { logoutRequested } from '../redux/actions/authActions';
 import '../App.css';
 
 function Header() {
-  const { user, isAuth } = useSelector((state) => state.auth);
+  const { isAuth } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   return (
     <Grid item xs={10}>
@@ -42,10 +42,10 @@ function Header() {
                 ? (
                   <>
                     <Button color="inherit">
-                      <Link to={`/users/${user.id}`} className="link">Profile</Link>
+                      <Link to="/users/profile" className="link">Profile</Link>
                     </Button>
                     <Button onClick={() => dispatch(logoutRequested())} color="inherit" sx={{ ml: 3 }}>
-                      Logout
+                      <Link to="/login" className="link">Logout</Link>
                     </Button>
                   </>
                 ) : (
