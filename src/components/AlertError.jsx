@@ -16,7 +16,7 @@ function AlertError({ type }) {
       <Stack sx={{ width: '100%' }} spacing={2}>
         <Alert severity="error">
           <AlertTitle>Error</AlertTitle>
-          { type === 'auth' ? `${error}` : 'Page loading error, try again later' }
+          {type === 'auth' ? error : 'Something went wrong, please try again later'}
         </Alert>
       </Stack>
     </Grid>

@@ -1,7 +1,6 @@
 import {
   call,
   put,
-  takeEvery,
   takeLatest,
 } from 'redux-saga/effects';
 
@@ -64,9 +63,9 @@ function* whoAmIWorker() {
 
 function* authWatcher() {
   yield takeLatest(actionTypes.REGISTRATION_REQUESTED, registrationWorker);
-  yield takeEvery(actionTypes.LOGIN_REQUESTED, loginWorker);
-  yield takeEvery(actionTypes.LOGOUT_REQUESTED, logoutWorker);
-  yield takeEvery(actionTypes.WHOAMI_REQUESTED, whoAmIWorker);
+  yield takeLatest(actionTypes.LOGIN_REQUESTED, loginWorker);
+  yield takeLatest(actionTypes.LOGOUT_REQUESTED, logoutWorker);
+  yield takeLatest(actionTypes.WHOAMI_REQUESTED, whoAmIWorker);
 }
 
 export default authWatcher;

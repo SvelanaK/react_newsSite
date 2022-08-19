@@ -16,9 +16,10 @@ function AuthPage({ type }) {
       alignItems="center"
     >
       <Header />
-      { type === 'registration'
-        ? <AuthForm type="registration" />
-        : <AuthForm type="login" /> }
+      <AuthForm type={type === 'registration'
+        ? 'registration'
+        : 'login'}
+      />
     </Grid>
   );
 }

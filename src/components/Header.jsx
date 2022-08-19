@@ -56,7 +56,6 @@ function Header() {
                     <Button color="inherit" sx={{ ml: 3 }}>
                       <Link to="/login" className="link">Login</Link>
                     </Button>
-
                   </>
                 )}
             </Box>

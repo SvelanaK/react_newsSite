@@ -2,11 +2,11 @@ import { React, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
-import { getNewsRequested } from '../redux/actions/newsActions';
-
 import News from './News';
 import Loading from './Loading';
 import AlertError from './AlertError';
+
+import { getNewsRequested } from '../redux/actions/newsActions';
 
 function AllNews() {
   const dispatch = useDispatch();

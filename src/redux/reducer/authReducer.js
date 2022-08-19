@@ -3,7 +3,7 @@ import actionTypes from '../actionTypes';
 const initialState = {
   user: {},
   isAuth: false,
-  error: '',
+  error: null,
   loading: false,
 };
 
@@ -49,12 +49,19 @@ function authReducer(state = initialState, action = {}) {
       return { ...state, isAuth: false };
     }
 
-    case actionTypes.WHOAMI_REQUESTED:
+    case actionTypes.WHOAMI_REQUESTED: {
+      return { ...state, loading: true };
+    }
     case actionTypes.WHOAMI_REJECTED: {
-      return { ...state };
+      return { ...state, loading: false, isAuth: false };
     }
     case actionTypes.WHOAMI_SUCCESS: {
-      return { ...state, user: action.payload.user, isAuth: true };
+      return {
+        ...state,
+        user: action.payload.user,
+        isAuth: true,
+        loading: false,
+      };
     }
 
     case actionTypes.REFRESH_SUCCESS: {
