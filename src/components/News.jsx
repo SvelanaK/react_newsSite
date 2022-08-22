@@ -12,6 +12,8 @@ import {
   Grid,
 } from '@mui/material';
 
+import '../App.css';
+
 function News({ news }) {
   return (
     <Grid item xs={5} sx={{ mb: 3 }}>
@@ -24,19 +26,19 @@ function News({ news }) {
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            { news.title }
+            {news.title}
           </Typography>
           <Typography sx={{ mb: 3 }} color="text.secondary">
-            { news.tag }
+            {news.tag}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            { news.content }
+            {news.content}
           </Typography>
         </CardContent>
         <CardActions>
-          <Link to={`/${news.userId}`} style={{ textDecoration: 'none' }}>
+          <Link to={`/users/${news.userId}`} className="link">
             <Button>
-              { news.user.login }
+              {news.user.login}
             </Button>
           </Link>
         </CardActions>
