@@ -1,4 +1,4 @@
-import { React, useEffect } from 'react';
+import { memo, React, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
@@ -43,4 +43,4 @@ function AllNews() {
   );
 }
 
-export default AllNews;
+export default memo(AllNews);

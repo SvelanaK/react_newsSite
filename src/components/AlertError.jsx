@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
@@ -16,7 +16,7 @@ function AlertError({ type }) {
       <Stack sx={{ width: '100%' }} spacing={2}>
         <Alert severity="error">
           <AlertTitle>Error</AlertTitle>
-          {type === 'auth' ? error : 'Something went wrong, please try again later'}
+          {type === 'news' ? 'Something went wrong, please try again later' : error}
         </Alert>
       </Stack>
     </Grid>
@@ -27,4 +27,4 @@ AlertError.propTypes = {
   type: PropTypes.string.isRequired,
 };
 
-export default AlertError;
+export default memo(AlertError);

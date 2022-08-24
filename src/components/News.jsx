@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import {
   Card,
@@ -12,9 +13,13 @@ import {
   Grid,
 } from '@mui/material';
 
+import { getUserPageRequested } from '../redux/actions/usersActions';
+
 import '../App.css';
 
 function News({ news }) {
+  const { siteUser } = useSelector((state) => state.siteUser);
+  const dispatch = useDispatch();
   return (
     <Grid item xs={5} sx={{ mb: 3 }}>
       <Card>
@@ -36,9 +41,13 @@ function News({ news }) {
           </Typography>
         </CardContent>
         <CardActions>
-          <Link to={`/users/${news.userId}`} className="link">
+          <Link
+            onClick={() => dispatch(getUserPageRequested(news.userId))}
+            to={`/users/${news.userId}`}
+            className="link"
+          >
             <Button>
-              {news.user.login}
+              {news.user ? news.user.login : siteUser.login}
             </Button>
           </Link>
         </CardActions>
@@ -59,4 +68,4 @@ News.propTypes = {
   }).isRequired,
 };
 
-export default News;
+export default memo(News);
