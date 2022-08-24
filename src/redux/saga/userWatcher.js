@@ -10,7 +10,10 @@ import {
 
 function* getUserPageWorker({ payload }) {
   try {
-    const data = yield call(getUserPageApi, payload);
+    const { data, error } = yield call(getUserPageApi, payload);
+    if (error) {
+      yield put(getUserPageRejected(error.response.data.message));
+    }
     yield put(getUserPageSuccess(data));
   } catch (error) {
     yield put(getUserPageRejected(error.response.data.message));

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
@@ -27,4 +27,4 @@ AlertError.propTypes = {
   type: PropTypes.string.isRequired,
 };
 
-export default AlertError;
+export default memo(AlertError);

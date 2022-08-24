@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import {
   Grid,
 } from '@mui/material';
@@ -23,4 +23,4 @@ function UserPage() {
   );
 }
 
-export default UserPage;
+export default memo(UserPage);

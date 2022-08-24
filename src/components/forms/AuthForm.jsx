@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { memo, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
@@ -109,4 +109,4 @@ AuthForm.propTypes = {
   type: PropTypes.string.isRequired,
 };
 
-export default AuthForm;
+export default memo(AuthForm);

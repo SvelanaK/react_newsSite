@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
 import { Grid } from '@mui/material';
@@ -28,4 +28,4 @@ AuthPage.propTypes = {
   type: PropTypes.string.isRequired,
 };
 
-export default AuthPage;
+export default memo(AuthPage);

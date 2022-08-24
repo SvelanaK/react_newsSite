@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Grid } from '@mui/material';
@@ -23,4 +23,4 @@ function MainPage() {
   );
 }
 
-export default MainPage;
+export default memo(MainPage);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 
 import { CircularProgress, Box, Grid } from '@mui/material';
 
@@ -12,4 +12,4 @@ function Loading() {
   );
 }
 
-export default Loading;
+export default memo(Loading);
