@@ -25,6 +25,20 @@ const email = yup
   .email('Enter a valid email')
   .required('Email is required');
 
+const title = yup
+  .string('Enter title')
+  .max(20, 'Must be 20 characters or less')
+  .required('Title is required');
+
+const tag = yup
+  .string('Enter tags')
+  .max(20, 'Must be 20 characters or less')
+  .required('Tag is required');
+
+const content = yup
+  .string('Enter news content')
+  .required('Content is required');
+
 export const registrationValidationSchema = yup.object({
   firstName,
   lastName,
@@ -36,4 +50,10 @@ export const registrationValidationSchema = yup.object({
 export const loginValidationSchema = yup.object({
   login,
   password,
+});
+
+export const newsValidationSchema = yup.object({
+  title,
+  tag,
+  content,
 });

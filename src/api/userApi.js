@@ -1,6 +1,6 @@
 import instance from './instance';
 
-async function getUserPageApi(id) {
+export async function getUserPageApi(id) {
   try {
     const { data } = await instance.get(`api/users/${id}`);
     return { data };
@@ -8,5 +8,11 @@ async function getUserPageApi(id) {
     return { error };
   }
 }
-
-export default getUserPageApi;
+export async function addNewsApi(body) {
+  try {
+    const { data } = await instance.post('api/users/addNews', body);
+    return { data };
+  } catch (error) {
+    return { error };
+  }
+}

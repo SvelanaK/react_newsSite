@@ -25,6 +25,21 @@ function usersReducer(state = initialState, action = {}) {
       return { ...state, error: action.payload, loading: false };
     }
 
+    case actionTypes.ADD_NEWS_REQUESTED: {
+      return { ...state, error: false, loading: true };
+    }
+    case actionTypes.ADD_NEWS_SUCCESS: {
+      return {
+        ...state,
+        usersNews: [...state.usersNews, action.payload],
+        loading: false,
+        error: false,
+      };
+    }
+    case actionTypes.ADD_NEWS_REJECTED: {
+      return { ...state, error: action.payload, loading: false };
+    }
+
     default:
       return state;
   }
