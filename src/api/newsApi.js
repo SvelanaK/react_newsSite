@@ -1,8 +1,19 @@
 import instance from './instance';
 
-async function getNewsApi() {
-  const { data } = await instance.get('api/news');
-  return data;
+export async function getNewsApi() {
+  try {
+    const { data } = await instance.get('api/news');
+    return data;
+  } catch (error) {
+    return { error };
+  }
 }
 
-export default getNewsApi;
+export async function addNewsApi(body) {
+  try {
+    const { data } = await instance.post('api/news/addNews', body);
+    return data;
+  } catch (error) {
+    return { error };
+  }
+}

@@ -13,13 +13,14 @@ import {
   Modal,
 } from '@mui/material';
 
+import NewsForm from './forms/NewsForm';
 import Loading from './Loading';
 import AlertError from './AlertError';
 import News from './News';
-import NewsForm from './forms/NewsForm';
+
+import { getUserPageRequested } from '../redux/actions/usersActions';
 
 import '../App.css';
-import { getUserPageRequested } from '../redux/actions/usersActions';
 
 function UserInfo() {
   const [open, setOpen] = React.useState(false);

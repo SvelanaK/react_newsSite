@@ -37,6 +37,7 @@ const tag = yup
 
 const content = yup
   .string('Enter news content')
+  .max(255, 'Must be 255 characters or less')
   .required('Content is required');
 
 export const registrationValidationSchema = yup.object({
