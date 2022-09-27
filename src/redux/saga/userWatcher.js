@@ -15,8 +15,8 @@ import {
 function* getUserPageWorker({ payload }) {
   try {
     const data = yield call(getUserPageApi, payload);
-    if (data.error) {
-      yield put(getUserPageRejected(data.error.message));
+    if (data.message) {
+      yield put(getUserPageRejected(data.message));
     } else {
       yield put(getUserPageSuccess(data));
     }

@@ -5,7 +5,7 @@ async function getUserPageApi(id) {
     const { data } = await instance.get(`api/users/${id}`);
     return data;
   } catch (error) {
-    return { error };
+    return error;
   }
 }
 

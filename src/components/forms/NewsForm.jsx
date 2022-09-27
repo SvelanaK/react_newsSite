@@ -36,24 +36,22 @@ function NewsForm() {
       <Typography variant="h4" component="div">
         Add news
       </Typography>
-      <Box
-        className="form"
-      >
-        {newsFields.map((el) => (
+      <Box className="form">
+        {newsFields.map(({ name, label, multiline }) => (
           <TextField
             required
-            key={el.name}
-            id={el.name}
-            name={el.name}
-            label={el.label}
+            key={name}
+            id={name}
+            name={name}
+            label={label}
             variant="outlined"
             type="text"
-            multiline={el.multiline}
+            multiline={multiline}
             maxRows={5}
-            value={formik.values[el.name]}
+            value={formik.values[name]}
             onChange={formik.handleChange}
-            error={formik.touched[el.name] && Boolean(formik.errors[el.name])}
-            helperText={formik.touched[el.name] && formik.errors[el.name]}
+            error={formik.touched[name] && Boolean(formik.errors[name])}
+            helperText={formik.touched[name] && formik.errors[name]}
           />
         ))}
       </Box>
