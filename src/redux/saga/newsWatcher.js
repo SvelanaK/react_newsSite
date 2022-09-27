@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 
 import { getNewsApi, addNewsApi } from '../../api/newsApi';
-import { refreshApi, whoAmIApi } from '../../api/authApi';
+import { refreshApi } from '../../api/authApi';
 import actionTypes from '../actionTypes';
 import {
   getNewsSuccess,
@@ -9,25 +9,21 @@ import {
   addNewsRejected,
   addNewsSuccess,
 } from '../actions/newsActions';
-import { refreshSuccess, whoAmIRejected, whoAmISuccess } from '../actions/authActions';
+import { refreshSuccess } from '../actions/authActions';
 
 function* getNewsFetchWorker() {
   try {
     const payload = yield call(getNewsApi);
     if (payload.error) {
-      yield put(getNewsRejected(payload));
+      throw new Error();
+    } else {
+      yield put(getNewsSuccess(payload));
     }
   } catch (error) {
     try {
-      try {
-        const data = yield call(whoAmIApi);
-        yield put(whoAmISuccess(data));
-      } catch (e) {
-        yield put(whoAmIRejected());
-        const userData = yield call(refreshApi);
-        localStorage.setItem('cookieRefreshToken', userData.accessToken);
-        yield put(refreshSuccess(userData));
-      }
+      const userData = yield call(refreshApi);
+      localStorage.setItem('cookieRefreshToken', userData.accessToken);
+      yield put(refreshSuccess(userData));
       const payload = yield call(getNewsApi);
       yield put(getNewsSuccess(payload));
     } catch (e) {
