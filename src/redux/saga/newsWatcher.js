@@ -9,43 +9,45 @@ import {
   addNewsRejected,
   addNewsSuccess,
 } from '../actions/newsActions';
-import { refreshSuccess } from '../actions/authActions';
+import { refreshRejected, refreshSuccess } from '../actions/authActions';
 
-function* refreshToken(api, success, rejected) {
+function* refreshToken() {
   try {
     const userData = yield call(refreshApi);
     localStorage.setItem('cookieRefreshToken', userData.accessToken);
     yield put(refreshSuccess(userData));
-    const news = yield call(api);
-    yield put(success(news));
-  } catch (e) {
-    yield put(rejected());
+  } catch {
+    yield put(refreshRejected());
   }
 }
 
 function* getNewsFetchWorker() {
   try {
     const payload = yield call(getNewsApi);
-    if (payload.message) {
-      yield refreshToken(getNewsApi, getNewsSuccess, getNewsRejected);
-    } else {
-      yield put(getNewsSuccess(payload));
-    }
+    yield put(getNewsSuccess(payload));
   } catch {
-    yield put(getNewsRejected());
+    yield refreshToken();
+    try {
+      const payload = yield call(getNewsApi);
+      yield put(getNewsSuccess(payload));
+    } catch {
+      yield put(getNewsRejected());
+    }
   }
 }
 
 function* addNewsWorker({ payload }) {
   try {
     const data = yield call(addNewsApi, payload);
-    if (data.message) {
-      yield refreshToken(addNewsApi, addNewsSuccess, addNewsRejected);
-    } else {
+    yield put(addNewsSuccess(data));
+  } catch {
+    yield refreshToken();
+    try {
+      const data = yield call(addNewsApi, payload);
       yield put(addNewsSuccess(data));
+    } catch {
+      yield put(addNewsRejected());
     }
-  } catch (error) {
-    yield put(addNewsRejected(error));
   }
 }
 

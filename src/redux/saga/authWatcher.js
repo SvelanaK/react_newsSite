@@ -26,7 +26,7 @@ function* whoAmIWorker() {
   try {
     const data = yield call(whoAmIApi);
     yield put(whoAmISuccess(data));
-  } catch (error) {
+  } catch {
     yield put(whoAmIRejected());
   }
 }
@@ -56,7 +56,7 @@ function* logoutWorker() {
     const data = yield call(logoutApi);
     localStorage.removeItem('cookieRefreshToken');
     yield put(logoutSuccess(data));
-  } catch (error) {
+  } catch {
     yield put(logoutRejected());
   }
 }
