@@ -1,6 +1,6 @@
 import React, { memo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import {
   Grid,
@@ -10,16 +10,23 @@ import {
   CardContent,
   CardMedia,
   Button,
+  Modal,
 } from '@mui/material';
 
+import NewsForm from './forms/NewsForm';
 import Loading from './Loading';
 import AlertError from './AlertError';
 import News from './News';
 
-import '../App.css';
 import { getUserPageRequested } from '../redux/actions/usersActions';
 
+import '../App.css';
+
 function UserInfo() {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   const {
     siteUser,
     usersNews,
@@ -50,6 +57,14 @@ function UserInfo() {
         xs={10}
         sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}
       >
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <NewsForm />
+        </Modal>
         <Card sx={{ display: 'flex' }} elevation={0}>
           <CardMedia
             component="img"
@@ -83,8 +98,8 @@ function UserInfo() {
         }}
         >
           { +id === user.id ? (
-            <Button variant="contained" size="large">
-              <Link to="/addNews" className="link">Add news</Link>
+            <Button onClick={handleOpen} variant="contained" size="large">
+              Add news
             </Button>
           ) : <Box />}
         </Box>

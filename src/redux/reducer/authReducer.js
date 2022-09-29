@@ -46,7 +46,7 @@ function authReducer(state = initialState, action = {}) {
       return { ...state };
     }
     case actionTypes.LOGOUT_SUCCESS: {
-      return { ...state, isAuth: false };
+      return { ...state, user: {}, isAuth: false };
     }
 
     case actionTypes.WHOAMI_REQUESTED: {

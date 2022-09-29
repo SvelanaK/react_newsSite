@@ -1,4 +1,8 @@
-import { call, put, takeEvery } from 'redux-saga/effects';
+import {
+  call,
+  put,
+  takeEvery,
+} from 'redux-saga/effects';
 
 import getUserPageApi from '../../api/userApi';
 
@@ -10,13 +14,14 @@ import {
 
 function* getUserPageWorker({ payload }) {
   try {
-    const { data, error } = yield call(getUserPageApi, payload);
-    if (error) {
-      yield put(getUserPageRejected(error.response.data.message));
+    const data = yield call(getUserPageApi, payload);
+    if (data.message) {
+      yield put(getUserPageRejected(data.message));
+    } else {
+      yield put(getUserPageSuccess(data));
     }
-    yield put(getUserPageSuccess(data));
   } catch (error) {
-    yield put(getUserPageRejected(error.response.data.message));
+    yield put(getUserPageRejected(error.response.data));
   }
 }
 

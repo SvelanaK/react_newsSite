@@ -22,13 +22,22 @@ import {
   whoAmISuccess,
 } from '../actions/authActions';
 
+function* whoAmIWorker() {
+  try {
+    const data = yield call(whoAmIApi);
+    yield put(whoAmISuccess(data));
+  } catch {
+    yield put(whoAmIRejected());
+  }
+}
+
 function* registrationWorker({ payload }) {
   try {
     const data = yield call(registrationApi, payload);
     localStorage.setItem('cookieRefreshToken', data.accessToken);
     yield put(registrationSuccess(data));
   } catch (error) {
-    yield put(registrationRejected(error.response.data.message));
+    yield put(registrationRejected(error.response.data));
   }
 }
 
@@ -38,7 +47,7 @@ function* loginWorker({ payload }) {
     localStorage.setItem('cookieRefreshToken', data.accessToken);
     yield put(loginSuccess(data));
   } catch (error) {
-    yield put(loginRejected(error.response.data.message));
+    yield put(loginRejected(error.response.data));
   }
 }
 
@@ -47,17 +56,8 @@ function* logoutWorker() {
     const data = yield call(logoutApi);
     localStorage.removeItem('cookieRefreshToken');
     yield put(logoutSuccess(data));
-  } catch (error) {
+  } catch {
     yield put(logoutRejected());
-  }
-}
-
-function* whoAmIWorker() {
-  try {
-    const data = yield call(whoAmIApi);
-    yield put(whoAmISuccess(data));
-  } catch (error) {
-    yield put(whoAmIRejected());
   }
 }
 

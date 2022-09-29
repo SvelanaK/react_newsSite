@@ -45,3 +45,21 @@ export const registrationFields = [
     style: { mb: 6 },
   },
 ];
+
+export const newsFields = [
+  {
+    name: 'title',
+    label: 'Title',
+    multiline: false,
+  },
+  {
+    name: 'tag',
+    label: 'Tags',
+    multiline: false,
+  },
+  {
+    name: 'content',
+    label: 'Content',
+    multiline: true,
+  },
+];
