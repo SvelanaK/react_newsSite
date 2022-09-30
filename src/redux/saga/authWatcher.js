@@ -34,7 +34,7 @@ function* whoAmIWorker() {
 function* registrationWorker({ payload }) {
   try {
     const data = yield call(registrationApi, payload);
-    localStorage.setItem('cookieRefreshToken', data.accessToken);
+    localStorage.setItem('accessToken', data.accessToken);
     yield put(registrationSuccess(data));
   } catch (error) {
     yield put(registrationRejected(error.response.data));
@@ -44,7 +44,7 @@ function* registrationWorker({ payload }) {
 function* loginWorker({ payload }) {
   try {
     const data = yield call(loginApi, payload);
-    localStorage.setItem('cookieRefreshToken', data.accessToken);
+    localStorage.setItem('accessToken', data.accessToken);
     yield put(loginSuccess(data));
   } catch (error) {
     yield put(loginRejected(error.response.data));
@@ -54,7 +54,7 @@ function* loginWorker({ payload }) {
 function* logoutWorker() {
   try {
     const data = yield call(logoutApi);
-    localStorage.removeItem('cookieRefreshToken');
+    localStorage.removeItem('accessToken');
     yield put(logoutSuccess(data));
   } catch {
     yield put(logoutRejected());

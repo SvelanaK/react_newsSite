@@ -14,7 +14,7 @@ import { refreshRejected, refreshSuccess } from '../actions/authActions';
 function* refreshToken() {
   try {
     const userData = yield call(refreshApi);
-    localStorage.setItem('cookieRefreshToken', userData.accessToken);
+    localStorage.setItem('accessToken', userData.accessToken);
     yield put(refreshSuccess(userData));
   } catch {
     yield put(refreshRejected());

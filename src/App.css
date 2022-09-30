@@ -30,3 +30,53 @@
   margin-top: 30px;
   margin-bottom: 30px;
 }
+
+.file-input {
+  height: 55px;
+  font-family:'Lucida Sans', sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-right: 17px;
+  color: rgb(102, 102, 102);
+  border: 1px rgb(180, 180, 180) solid;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.file-input > span {
+  height: 55px;
+  width: 137px;
+  font-family:'Lucida Sans', sans-serif;
+  align-items: center;
+  color: rgb(102, 102, 102);
+  position: relative;
+  padding: 35px 0 0 17px;
+  z-index: 1;
+  background-color:aliceblue;
+}
+
+.file-input:hover {
+  border: 1px rgb(82, 82, 82) solid;
+}
+
+input[type='file'] {
+  width: 80%;
+  height: 25px;
+  top: 25%;
+  right: 20%;
+  position: absolute;
+  cursor: pointer;
+  font-size: large;
+}
+
+.empty-message {
+  font-family:'Lucida Sans', sans-serif;
+  font-size: 20px;
+  width: 350px;
+  text-align: center;
+  margin-top: 350px;
+  color: rgb(158, 158, 158);
+  display: block;
+}

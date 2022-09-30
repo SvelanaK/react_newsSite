@@ -26,7 +26,7 @@ function News({ news }) {
         <CardMedia
           component="img"
           height="200"
-          image="https://memepedia.ru/wp-content/uploads/2020/10/big-floppa-meme.png"
+          image={`http://localhost:4000/images/${news.picture}`}
           alt=""
         />
         <CardContent>
@@ -62,6 +62,7 @@ News.propTypes = {
     tag: PropTypes.string,
     content: PropTypes.string,
     userId: PropTypes.number,
+    picture: PropTypes.string,
     user: PropTypes.shape({
       login: PropTypes.string,
     }),

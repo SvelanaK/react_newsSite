@@ -1,4 +1,9 @@
-import React, { memo, useEffect } from 'react';
+import {
+  React,
+  memo,
+  useEffect,
+  useState,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
@@ -23,7 +28,7 @@ import { getUserPageRequested } from '../redux/actions/usersActions';
 import '../App.css';
 
 function UserInfo() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
@@ -63,7 +68,7 @@ function UserInfo() {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <NewsForm />
+          <NewsForm open={open} handleClose={handleClose} />
         </Modal>
         <Card sx={{ display: 'flex' }} elevation={0}>
           <CardMedia
