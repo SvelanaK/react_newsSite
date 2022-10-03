@@ -26,7 +26,7 @@ function News({ news }) {
         <CardMedia
           component="img"
           height="200"
-          image={`http://localhost:4000/images/${news.picture}`}
+          image={`${process.env.REACT_APP_BASE_URL}images/${news.picture}`}
           alt=""
         />
         <CardContent>

@@ -27,11 +27,7 @@ function NewsForm({ open, handleClose }) {
     },
     validationSchema: newsValidationSchema,
     onSubmit: (payload) => {
-      const form = new FormData();
-      form.append('picture', picture);
-      const keys = Object.keys(payload);
-      keys.forEach((key) => form.append(key, payload[key]));
-      dispatch(addNewsRequested(form));
+      dispatch(addNewsRequested({ values: payload, picture }));
       handleClose();
     },
   });

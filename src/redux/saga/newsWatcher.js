@@ -37,13 +37,18 @@ function* getNewsFetchWorker() {
 }
 
 function* addNewsWorker({ payload }) {
+  const { values, picture } = payload;
+  const form = new FormData();
+  form.append('picture', picture);
+  const keys = Object.keys(values);
+  keys.forEach((key) => form.append(key, values[key]));
   try {
-    const data = yield call(addNewsApi, payload);
+    const data = yield call(addNewsApi, form);
     yield put(addNewsSuccess(data));
   } catch {
     yield refreshToken();
     try {
-      const data = yield call(addNewsApi, payload);
+      const data = yield call(addNewsApi, form);
       yield put(addNewsSuccess(data));
     } catch {
       yield put(addNewsRejected());
