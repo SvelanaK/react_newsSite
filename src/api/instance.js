@@ -7,7 +7,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use((config) => {
   const newConfig = config;
-  newConfig.headers.Authorization = localStorage.getItem('cookieRefreshToken');
+  newConfig.headers.Authorization = localStorage.getItem('accessToken');
   return newConfig;
 });
 

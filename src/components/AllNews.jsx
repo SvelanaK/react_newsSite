@@ -8,6 +8,8 @@ import AlertError from './AlertError';
 
 import { getNewsRequested } from '../redux/actions/newsActions';
 
+import '../App.css';
+
 function AllNews() {
   const dispatch = useDispatch();
   const { loading, error } = useSelector((state) => state.news);
@@ -21,6 +23,10 @@ function AllNews() {
 
   if (!isAuth) {
     return <Navigate replace to="/login" />;
+  }
+
+  if (allNews.length === 0) {
+    return <div className="empty-message">NO NEWS ADDED YET</div>;
   }
 
   if (loading) {
