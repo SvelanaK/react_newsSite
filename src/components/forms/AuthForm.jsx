@@ -1,4 +1,4 @@
-import React, { memo, useMemo } from 'react';
+import React, { memo, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
@@ -30,6 +30,16 @@ import {
 
 function AuthForm({ type }) {
   const dispatch = useDispatch();
+
+  const [picture, changeFile] = useState(null);
+
+  const handleFileChange = (event) => {
+    if (event.target.files) {
+      const file = event.target.files[0];
+      changeFile(file);
+    }
+  };
+
   const formik = useFormik({
     initialValues: (type === 'registration'
       ? {
@@ -43,7 +53,7 @@ function AuthForm({ type }) {
     validationSchema: (type === 'registration' ? registrationValidationSchema : loginValidationSchema),
     onSubmit: (payload) => {
       if (type === 'registration') {
-        dispatch(registrationRequested(payload));
+        dispatch(registrationRequested({ values: payload, picture }));
       } else {
         dispatch(loginRequested(payload));
       }
@@ -98,6 +108,22 @@ function AuthForm({ type }) {
             helperText={formik.touched[el.name] && formik.errors[el.name]}
           />
         )) }
+        {type === 'registration'
+          ? (
+            <>
+              <span className="avatar-span">Add avatar *</span>
+              <Box className="file-input-reg">
+                <input
+                  required
+                  id="files"
+                  name="file"
+                  accept="image/*"
+                  type="file"
+                  onChange={handleFileChange}
+                />
+              </Box>
+            </>
+          ) : <Box />}
         <Button variant="outlined" sx={{ mb: 10 }} type="submit">Сonfirm</Button>
       </Box>
       {error ? <AlertError type="auth" /> : <Box />}
