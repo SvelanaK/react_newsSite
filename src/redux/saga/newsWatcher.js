@@ -11,7 +11,7 @@ import {
 } from '../actions/newsActions';
 import { refreshRejected, refreshSuccess } from '../actions/authActions';
 
-function* refreshToken() {
+export function* refreshToken() {
   try {
     const userData = yield call(refreshApi);
     localStorage.setItem('accessToken', userData.accessToken);

@@ -42,7 +42,7 @@ export const registrationFields = [
     name: 'password',
     label: 'Password',
     type: 'password',
-    style: { mb: 6 },
+    style: { mb: 4 },
   },
 ];
 
@@ -61,5 +61,16 @@ export const newsFields = [
     name: 'content',
     label: 'Content',
     multiline: true,
+  },
+];
+
+export const editProfileFields = [
+  {
+    name: 'login',
+    label: 'Login',
+  },
+  {
+    name: 'email',
+    label: 'Email',
   },
 ];

@@ -1,6 +1,6 @@
 import instance from './instance';
 
-async function getUserPageApi(id) {
+export async function getUserPageApi(id) {
   try {
     const { data } = await instance.get(`api/users/${id}`);
     return data;
@@ -9,4 +9,11 @@ async function getUserPageApi(id) {
   }
 }
 
-export default getUserPageApi;
+export async function editUserPageApi(body) {
+  try {
+    const { data } = await instance.patch('api/users/editProfile', body);
+    return data;
+  } catch {
+    throw new Error();
+  }
+}

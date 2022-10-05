@@ -58,3 +58,8 @@ export const newsValidationSchema = yup.object({
   tag,
   content,
 });
+
+export const profileValidationSchema = yup.object({
+  login,
+  email,
+});
