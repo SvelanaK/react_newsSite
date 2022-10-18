@@ -9,9 +9,9 @@ export async function getUserPageApi(id) {
   }
 }
 
-export async function editUserPageApi(body) {
+export async function editUserPageApi(id, body) {
   try {
-    const { data } = await instance.patch('api/users/editProfile', body);
+    const { data } = await instance.patch(`api/users/${id}`, body);
     return data;
   } catch {
     throw new Error();

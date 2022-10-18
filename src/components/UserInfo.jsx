@@ -3,6 +3,7 @@ import {
   memo,
   useEffect,
   useState,
+  useMemo,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -51,7 +52,11 @@ function UserInfo() {
 
   useEffect(() => {
     dispatch(getUserPageRequested(id));
-  }, []);
+  }, [user]);
+
+  const profile = useMemo(() => ({
+    login: siteUser.login, email: siteUser.email, picture: siteUser.picture,
+  }), [user, siteUser]);
 
   if (loading) {
     return <Loading />;
@@ -82,21 +87,17 @@ function UserInfo() {
           <CardMedia
             component="img"
             sx={{ width: 350, borderRadius: 5 }}
-            image={
-              +id === user.id
-                ? `${process.env.REACT_APP_BASE_URL}${user.picture}`
-                : `${process.env.REACT_APP_BASE_URL}${siteUser.picture}`
-            }
+            image={`${process.env.REACT_APP_BASE_URL}${profile.picture}`}
             alt="userAvatar"
           />
 
           <Box sx={{ display: 'flex', flexDirection: 'column', ml: 4 }}>
             <CardContent>
               <Typography component="div" variant="h5">
-                { +id === user.id ? user.login : siteUser.login}
+                {profile.login}
               </Typography>
               <Typography variant="subtitle1" color="text.secondary" component="div">
-                { +id === user.id ? user.email : siteUser.email}
+                {profile.email}
               </Typography>
             </CardContent>
             <Box sx={{

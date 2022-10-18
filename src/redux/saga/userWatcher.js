@@ -31,18 +31,18 @@ function* getUserPageWorker({ payload }) {
 }
 
 function* editUserPageWorker({ payload }) {
-  const { values, picture } = payload;
+  const { values, picture, id } = payload;
   const form = new FormData();
   form.append('picture', picture);
   const keys = Object.keys(values);
   keys.forEach((key) => form.append(key, values[key]));
   try {
-    const data = yield call(editUserPageApi, form);
+    const data = yield call(editUserPageApi, id, form);
     yield put(editProfileSuccess(data));
   } catch {
     yield refreshToken();
     try {
-      const data = yield call(editUserPageApi, form);
+      const data = yield call(editUserPageApi, id, form);
       yield put(editProfileSuccess(data));
     } catch {
       yield put(editProfileRejected());

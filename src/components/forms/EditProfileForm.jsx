@@ -1,4 +1,5 @@
 import React, { memo, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import PropTypes from 'prop-types';
@@ -18,6 +19,7 @@ function EditProfileForm({ handleClose }) {
   const dispatch = useDispatch();
   const [picture, changeFile] = useState(null);
   const { user } = useSelector((state) => state.auth);
+  const { id } = useParams();
 
   const formik = useFormik({
     initialValues: {
@@ -25,8 +27,8 @@ function EditProfileForm({ handleClose }) {
       login: user.login,
     },
     validationSchema: profileValidationSchema,
-    onSubmit: (payload) => {
-      dispatch(editProfileRequested({ values: payload, picture }));
+    onSubmit: (values) => {
+      dispatch(editProfileRequested({ values, picture, id }));
       handleClose();
     },
   });
@@ -62,7 +64,6 @@ function EditProfileForm({ handleClose }) {
           <Box className="edit-input-file">
             <Typography variant="caption">Avatar</Typography>
             <TextField
-              required
               id="files"
               name="file"
               variant="standard"
@@ -74,6 +75,7 @@ function EditProfileForm({ handleClose }) {
         </Box>
         <Box className="edit-buttons">
           <Button
+            disabled={!picture}
             type="submit"
             variant="outlined"
           >
