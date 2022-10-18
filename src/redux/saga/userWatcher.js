@@ -12,8 +12,8 @@ import actionTypes from '../actionTypes';
 import {
   getUserPageSuccess,
   getUserPageRejected,
-  editUserPageSuccess,
-  editUserPageRejected,
+  editProfileSuccess,
+  editProfileRejected,
 } from '../actions/usersActions';
 import { refreshToken } from './newsWatcher';
 
@@ -38,21 +38,21 @@ function* editUserPageWorker({ payload }) {
   keys.forEach((key) => form.append(key, values[key]));
   try {
     const data = yield call(editUserPageApi, form);
-    yield put(editUserPageSuccess(data));
+    yield put(editProfileSuccess(data));
   } catch {
     yield refreshToken();
     try {
       const data = yield call(editUserPageApi, form);
-      yield put(editUserPageSuccess(data));
+      yield put(editProfileSuccess(data));
     } catch {
-      yield put(editUserPageRejected());
+      yield put(editProfileRejected());
     }
   }
 }
 
 function* userWatcher() {
   yield takeEvery(actionTypes.USER_PAGE_REQUESTED, getUserPageWorker);
-  yield takeEvery(actionTypes.EDIT_USER_PAGE_REQUESTED, editUserPageWorker);
+  yield takeEvery(actionTypes.EDIT_PROFILE_REQUESTED, editUserPageWorker);
 }
 
 export default userWatcher;

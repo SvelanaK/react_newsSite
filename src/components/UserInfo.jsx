@@ -66,9 +66,7 @@ function UserInfo() {
       <Grid
         item
         xs={10}
-        sx={{
-          height: 370, display: 'flex', flexDirection: 'row', justifyContent: 'space-between',
-        }}
+        className="user-grid"
       >
 
         <Modal
@@ -86,8 +84,8 @@ function UserInfo() {
             sx={{ width: 350, borderRadius: 5 }}
             image={
               +id === user.id
-                ? `${process.env.REACT_APP_BASE_URL}/images/${user.picture}`
-                : `${process.env.REACT_APP_BASE_URL}/images/${siteUser.picture}`
+                ? `${process.env.REACT_APP_BASE_URL}${user.picture}`
+                : `${process.env.REACT_APP_BASE_URL}${siteUser.picture}`
             }
             alt="userAvatar"
           />

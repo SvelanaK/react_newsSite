@@ -68,10 +68,10 @@ function authReducer(state = initialState, action = {}) {
       return { ...state, user: action.payload.user, isAuth: true };
     }
 
-    case actionTypes.EDIT_USER_PAGE_REQUESTED: {
+    case actionTypes.EDIT_PROFILE_REQUESTED: {
       return { ...state, error: false, loading: true };
     }
-    case actionTypes.EDIT_USER_PAGE_SUCCESS: {
+    case actionTypes.EDIT_PROFILE_SUCCESS: {
       return {
         ...state,
         user: action.payload.user,
@@ -79,7 +79,7 @@ function authReducer(state = initialState, action = {}) {
         error: false,
       };
     }
-    case actionTypes.EDIT_USER_PAGE_REJECTED: {
+    case actionTypes.EDIT_PROFILE_REJECTED: {
       return { ...state, error: action.payload, loading: false };
     }
 

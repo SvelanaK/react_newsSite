@@ -31,12 +31,12 @@ import {
 function AuthForm({ type }) {
   const dispatch = useDispatch();
 
-  const [picture, changeFile] = useState(null);
+  const [picture, setPicture] = useState(null);
 
   const handleFileChange = (event) => {
     if (event.target.files) {
       const file = event.target.files[0];
-      changeFile(file);
+      setPicture(file);
     }
   };
 
@@ -51,11 +51,11 @@ function AuthForm({ type }) {
       }
       : { login: '', password: '' }),
     validationSchema: (type === 'registration' ? registrationValidationSchema : loginValidationSchema),
-    onSubmit: (payload) => {
+    onSubmit: (values) => {
       if (type === 'registration') {
-        dispatch(registrationRequested({ values: payload, picture }));
+        dispatch(registrationRequested({ values, picture }));
       } else {
-        dispatch(loginRequested(payload));
+        dispatch(loginRequested(values));
       }
     },
   });

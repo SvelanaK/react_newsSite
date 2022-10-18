@@ -10,7 +10,7 @@ import {
   Typography,
 } from '@mui/material';
 
-import { editUserPageRequested } from '../../redux/actions/usersActions';
+import { editProfileRequested } from '../../redux/actions/usersActions';
 import { profileValidationSchema } from '../../constants/validationSchema';
 import { editProfileFields } from '../../constants/authFields';
 
@@ -26,7 +26,7 @@ function EditProfileForm({ handleClose }) {
     },
     validationSchema: profileValidationSchema,
     onSubmit: (payload) => {
-      dispatch(editUserPageRequested({ values: payload, picture }));
+      dispatch(editProfileRequested({ values: payload, picture }));
       handleClose();
     },
   });

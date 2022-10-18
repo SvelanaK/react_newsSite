@@ -142,3 +142,10 @@
   display: flex;
   justify-content: space-between;
 }
+
+.user-grid {
+  height: 370px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
