@@ -3,6 +3,7 @@ import {
   memo,
   useEffect,
   useState,
+  useMemo,
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -16,9 +17,11 @@ import {
   CardMedia,
   Button,
   Modal,
+  Collapse,
 } from '@mui/material';
 
 import NewsForm from './forms/NewsForm';
+import EditProfileForm from './forms/EditProfileForm';
 import Loading from './Loading';
 import AlertError from './AlertError';
 import News from './News';
@@ -31,6 +34,10 @@ function UserInfo() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [edit, setEdit] = useState(false);
+  const editOpen = () => setEdit(true);
+  const editClose = () => setEdit(false);
 
   const {
     siteUser,
@@ -45,7 +52,11 @@ function UserInfo() {
 
   useEffect(() => {
     dispatch(getUserPageRequested(id));
-  }, []);
+  }, [user]);
+
+  const profile = useMemo(() => ({
+    login: siteUser.login, email: siteUser.email, picture: siteUser.picture,
+  }), [user, siteUser]);
 
   if (loading) {
     return <Loading />;
@@ -60,8 +71,9 @@ function UserInfo() {
       <Grid
         item
         xs={10}
-        sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}
+        className="user-grid"
       >
+
         <Modal
           open={open}
           onClose={handleClose}
@@ -70,20 +82,22 @@ function UserInfo() {
         >
           <NewsForm open={open} handleClose={handleClose} />
         </Modal>
+
         <Card sx={{ display: 'flex' }} elevation={0}>
           <CardMedia
             component="img"
             sx={{ width: 350, borderRadius: 5 }}
-            image="https://cdn.ren.tv/cache/960x540/media/img/7d/4e/7d4e1c868f36e52de337b474dd6d9f1953072c8e.jpg"
+            image={`${process.env.REACT_APP_BASE_URL}${profile.picture}`}
             alt="userAvatar"
           />
+
           <Box sx={{ display: 'flex', flexDirection: 'column', ml: 4 }}>
             <CardContent>
               <Typography component="div" variant="h5">
-                {siteUser.login}
+                {profile.login}
               </Typography>
               <Typography variant="subtitle1" color="text.secondary" component="div">
-                {siteUser.email}
+                {profile.email}
               </Typography>
             </CardContent>
             <Box sx={{
@@ -91,9 +105,15 @@ function UserInfo() {
             }}
             />
             { +id === user.id ? (
-              <Button variant="text" size="small" sx={{ width: 130 }}>
-                Edit profile
-              </Button>
+              <>
+                <Button onClick={editOpen} variant="text" size="small" sx={{ width: 130 }}>
+                  Edit profile
+                </Button>
+                <Collapse className="edit-modal" orientation="horizontal" in={edit}>
+                  <EditProfileForm handleClose={editClose} />
+                </Collapse>
+
+              </>
             ) : <Box />}
 
           </Box>

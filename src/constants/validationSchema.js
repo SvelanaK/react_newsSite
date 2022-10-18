@@ -40,6 +40,14 @@ const content = yup
   .max(255, 'Must be 255 characters or less')
   .required('Content is required');
 
+const editLogin = yup
+  .string('Enter your login')
+  .max(20, 'Must be 20 characters or less');
+
+const editEmail = yup
+  .string('Enter your email')
+  .email('Enter a valid email');
+
 export const registrationValidationSchema = yup.object({
   firstName,
   lastName,
@@ -57,4 +65,9 @@ export const newsValidationSchema = yup.object({
   title,
   tag,
   content,
+});
+
+export const profileValidationSchema = yup.object({
+  editLogin,
+  editEmail,
 });

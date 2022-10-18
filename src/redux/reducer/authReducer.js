@@ -68,6 +68,21 @@ function authReducer(state = initialState, action = {}) {
       return { ...state, user: action.payload.user, isAuth: true };
     }
 
+    case actionTypes.EDIT_PROFILE_REQUESTED: {
+      return { ...state, error: false, loading: true };
+    }
+    case actionTypes.EDIT_PROFILE_SUCCESS: {
+      return {
+        ...state,
+        user: action.payload.user,
+        loading: false,
+        error: false,
+      };
+    }
+    case actionTypes.EDIT_PROFILE_REJECTED: {
+      return { ...state, error: action.payload, loading: false };
+    }
+
     default:
       return state;
   }

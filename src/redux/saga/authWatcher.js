@@ -32,8 +32,13 @@ function* whoAmIWorker() {
 }
 
 function* registrationWorker({ payload }) {
+  const { values, picture } = payload;
+  const form = new FormData();
+  form.append('picture', picture);
+  const keys = Object.keys(values);
+  keys.forEach((key) => form.append(key, values[key]));
   try {
-    const data = yield call(registrationApi, payload);
+    const data = yield call(registrationApi, form);
     localStorage.setItem('accessToken', data.accessToken);
     yield put(registrationSuccess(data));
   } catch (error) {

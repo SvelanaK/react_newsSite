@@ -8,7 +8,7 @@ import UserInfo from './UserInfo';
 
 import '../App.css';
 
-function UserPage() {
+function UserProfile() {
   return (
     <Grid
       container
@@ -23,4 +23,4 @@ function UserPage() {
   );
 }
 
-export default memo(UserPage);
+export default memo(UserProfile);

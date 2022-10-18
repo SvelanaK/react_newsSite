@@ -4,13 +4,18 @@ import {
   takeEvery,
 } from 'redux-saga/effects';
 
-import getUserPageApi from '../../api/userApi';
-
+import {
+  getUserPageApi,
+  editUserPageApi,
+} from '../../api/userApi';
 import actionTypes from '../actionTypes';
 import {
   getUserPageSuccess,
   getUserPageRejected,
+  editProfileSuccess,
+  editProfileRejected,
 } from '../actions/usersActions';
+import { refreshToken } from './newsWatcher';
 
 function* getUserPageWorker({ payload }) {
   try {
@@ -25,8 +30,29 @@ function* getUserPageWorker({ payload }) {
   }
 }
 
+function* editUserPageWorker({ payload }) {
+  const { values, picture, id } = payload;
+  const form = new FormData();
+  form.append('picture', picture);
+  const keys = Object.keys(values);
+  keys.forEach((key) => form.append(key, values[key]));
+  try {
+    const data = yield call(editUserPageApi, id, form);
+    yield put(editProfileSuccess(data));
+  } catch {
+    yield refreshToken();
+    try {
+      const data = yield call(editUserPageApi, id, form);
+      yield put(editProfileSuccess(data));
+    } catch {
+      yield put(editProfileRejected());
+    }
+  }
+}
+
 function* userWatcher() {
   yield takeEvery(actionTypes.USER_PAGE_REQUESTED, getUserPageWorker);
+  yield takeEvery(actionTypes.EDIT_PROFILE_REQUESTED, editUserPageWorker);
 }
 
 export default userWatcher;
