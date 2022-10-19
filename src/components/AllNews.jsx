@@ -1,16 +1,24 @@
-import { memo, React, useEffect } from 'react';
+import {
+  memo,
+  React,
+  useEffect,
+  useState,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
 import News from './News';
 import Loading from './Loading';
 import AlertError from './AlertError';
+import SearchAndTabs from './SearchAndTabs';
 
 import { getNewsRequested } from '../redux/actions/newsActions';
 
 import '../App.css';
 
 function AllNews() {
+  const [filteredNews, setFilteredNews] = useState([]);
+
   const dispatch = useDispatch();
   const { loading, error } = useSelector((state) => state.news);
 
@@ -39,7 +47,8 @@ function AllNews() {
 
   return (
     <>
-      {allNews.map((news) => (
+      <SearchAndTabs setFilteredNews={setFilteredNews} news={allNews} />
+      {filteredNews.map((news) => (
         <News
           news={news}
           key={news.id}

@@ -13,7 +13,7 @@ import {
 
 import { editProfileRequested } from '../../redux/actions/usersActions';
 import { profileValidationSchema } from '../../constants/validationSchema';
-import { editProfileFields } from '../../constants/authFields';
+import { editProfileFields } from '../../constants/formFields';
 
 function EditProfileForm({ handleClose }) {
   const dispatch = useDispatch();

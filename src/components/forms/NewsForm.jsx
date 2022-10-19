@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 
-import { newsFields } from '../../constants/authFields';
+import { newsFields } from '../../constants/formFields';
 import { newsValidationSchema } from '../../constants/validationSchema';
 import { addNewsRequested } from '../../redux/actions/newsActions';
 
@@ -26,8 +26,8 @@ function NewsForm({ open, handleClose }) {
       content: '',
     },
     validationSchema: newsValidationSchema,
-    onSubmit: (payload) => {
-      dispatch(addNewsRequested({ values: payload, picture }));
+    onSubmit: (values) => {
+      dispatch(addNewsRequested({ values, picture }));
       handleClose();
     },
   });

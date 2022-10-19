@@ -26,7 +26,7 @@ import {
 import {
   registrationFields,
   loginFields,
-} from '../../constants/authFields';
+} from '../../constants/formFields';
 
 function AuthForm({ type }) {
   const dispatch = useDispatch();
