@@ -12,37 +12,9 @@ import {
   InputBase,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import { tabsFields } from '../constants/formFields';
 
-function filterNews(searchText, listOfNews, tab) {
-  if (!searchText) {
-    return listOfNews;
-  }
-  const filterNewsByTabs = {
-    all: (item) => [
-      item.title,
-      item.content,
-      item.tag,
-      item.user.login,
-    ],
-    authors: (item) => [
-      item.user.login,
-    ],
-    tags: (item) => [
-      item.tag,
-    ],
-  };
-  if (!Object.keys(filterNewsByTabs).includes(tab)) {
-    return [];
-  }
-  const filterFields = filterNewsByTabs[tab];
-  const lowerCaseText = searchText.toLowerCase();
-  return listOfNews.filter((item) => (
-    filterFields(item)
-      .map((text) => String(text).toLowerCase())
-      .some((filterText) => filterText.includes(lowerCaseText))
-  ));
-}
+import { tabsFields } from '../constants/formFields';
+import filterNews from '../utilities/filterNews';
 
 function SearchAndTabs({ setFilteredNews, news }) {
   const [textInput, setTextInput] = useState('');
