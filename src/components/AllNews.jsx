@@ -12,9 +12,11 @@ import News from './News';
 import Loading from './Loading';
 import AlertError from './AlertError';
 import SearchAndTabs from './SearchAndTabs';
+import PagePagination from './PagePagination';
 
 import { getNewsRequested } from '../redux/actions/newsActions';
 import filterNews from '../utilities/filterNews';
+import usePagination from '../hooks/usePagination';
 
 import '../App.css';
 
@@ -31,6 +33,14 @@ function AllNews() {
     () => filterNews(textInput, allNews, tab),
     [textInput, tab, allNews],
   );
+
+  const newsLimit = 4;
+  const {
+    totalPages,
+    currentPage,
+    setCurrentPage,
+    newsPaginArr,
+  } = usePagination(filteredNews, newsLimit);
 
   useEffect(() => {
     dispatch(getNewsRequested());
@@ -55,12 +65,17 @@ function AllNews() {
   return (
     <>
       <SearchAndTabs setTextInput={setTextInput} setTab={setTab} />
-      {filteredNews.map((news) => (
+      {newsPaginArr.map((news) => (
         <News
           news={news}
           key={news.id}
         />
       )) }
+      <PagePagination
+        totalPages={totalPages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </>
   );
 }

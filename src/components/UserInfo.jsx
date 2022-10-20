@@ -25,8 +25,10 @@ import EditProfileForm from './forms/EditProfileForm';
 import Loading from './Loading';
 import AlertError from './AlertError';
 import News from './News';
+import PagePagination from './PagePagination';
 
 import { getUserPageRequested } from '../redux/actions/usersActions';
+import usePagination from '../hooks/usePagination';
 
 import '../App.css';
 
@@ -45,6 +47,15 @@ function UserInfo() {
     loading,
     error,
   } = useSelector((state) => state.siteUser);
+
+  const newsLimit = 2;
+  const {
+    totalPages,
+    currentPage,
+    setCurrentPage,
+    newsPaginArr,
+  } = usePagination(usersNews, newsLimit);
+
   const { user } = useSelector((state) => state.auth);
 
   const { id } = useParams();
@@ -134,16 +145,21 @@ function UserInfo() {
         xs={10}
         sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}
       >
-        <Typography component="div" variant="h4" sx={{ mt: 10 }}>
+        <Typography component="div" variant="h4" sx={{ mt: 2 }}>
           My Posts
         </Typography>
       </Grid>
-      {usersNews.map((news) => (
+      {newsPaginArr.map((news) => (
         <News
           news={news}
           key={news.id}
         />
       )) }
+      <PagePagination
+        totalPages={totalPages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </>
   );
 }
