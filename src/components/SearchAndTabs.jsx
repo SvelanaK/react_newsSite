@@ -1,6 +1,4 @@
-import React, {
-  memo, useEffect, useMemo, useState,
-} from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -14,18 +12,8 @@ import {
 import SearchIcon from '@mui/icons-material/Search';
 
 import { tabsFields } from '../constants/formFields';
-import filterNews from '../utilities/filterNews';
 
-function SearchAndTabs({ setFilteredNews, news }) {
-  const [textInput, setTextInput] = useState('');
-  const [tab, setTab] = useState('all');
-
-  const filteredNews = useMemo(() => filterNews(textInput, news, tab), [textInput, tab]);
-
-  useEffect(() => {
-    setFilteredNews(filteredNews);
-  }, [tab, textInput]);
-
+function SearchAndTabs({ setTextInput, setTab }) {
   return (
     <Grid
       item
@@ -71,17 +59,8 @@ function SearchAndTabs({ setFilteredNews, news }) {
 }
 
 SearchAndTabs.propTypes = {
-  news: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string,
-    tag: PropTypes.string,
-    content: PropTypes.string,
-    userId: PropTypes.number,
-    picture: PropTypes.string,
-    user: PropTypes.shape({
-      login: PropTypes.string,
-    }),
-  })).isRequired,
-  setFilteredNews: PropTypes.func.isRequired,
+  setTab: PropTypes.func.isRequired,
+  setTextInput: PropTypes.func.isRequired,
 };
 
 export default memo(SearchAndTabs);
