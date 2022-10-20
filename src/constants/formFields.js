@@ -74,3 +74,18 @@ export const editProfileFields = [
     label: 'Email',
   },
 ];
+
+export const tabsFields = [
+  {
+    value: 'all',
+    label: 'All',
+  },
+  {
+    value: 'tags',
+    label: 'Tags',
+  },
+  {
+    value: 'authors',
+    label: 'Authors',
+  },
+];
