@@ -8,11 +8,12 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 
+import { Grid, Pagination } from '@mui/material';
+
 import News from './News';
 import Loading from './Loading';
 import AlertError from './AlertError';
 import SearchAndTabs from './SearchAndTabs';
-import PagePagination from './PagePagination';
 
 import { getNewsRequested } from '../redux/actions/newsActions';
 import filterNews from '../utilities/filterNews';
@@ -36,10 +37,10 @@ function AllNews() {
 
   const newsLimit = 4;
   const {
-    totalPages,
+    pagesCount,
     currentPage,
     setCurrentPage,
-    newsPaginArr,
+    pageNews,
   } = usePagination(filteredNews, newsLimit);
 
   useEffect(() => {
@@ -65,17 +66,27 @@ function AllNews() {
   return (
     <>
       <SearchAndTabs setTextInput={setTextInput} setTab={setTab} />
-      {newsPaginArr.map((news) => (
+      {pageNews.map((news) => (
         <News
           news={news}
           key={news.id}
         />
       )) }
-      <PagePagination
-        totalPages={totalPages}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
+      <Grid
+        item
+        xs={10}
+        className="pagination"
+      >
+        <Pagination
+          count={pagesCount}
+          page={currentPage}
+          size="large"
+          color="primary"
+          onChange={(event) => setCurrentPage(Number(event.target.textContent))}
+          hidePrevButton
+          hideNextButton
+        />
+      </Grid>
     </>
   );
 }
