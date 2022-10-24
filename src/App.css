@@ -183,3 +183,11 @@
 .Mui-focused {
   border: 1px solid rgba(0, 0, 0, 0.055);
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  padding-bottom: 30px;
+}

@@ -18,6 +18,7 @@ import {
   Button,
   Modal,
   Collapse,
+  Pagination,
 } from '@mui/material';
 
 import NewsForm from './forms/NewsForm';
@@ -27,6 +28,7 @@ import AlertError from './AlertError';
 import News from './News';
 
 import { getUserPageRequested } from '../redux/actions/usersActions';
+import usePagination from '../hooks/usePagination';
 
 import '../App.css';
 
@@ -45,6 +47,15 @@ function UserInfo() {
     loading,
     error,
   } = useSelector((state) => state.siteUser);
+
+  const newsLimit = 2;
+  const {
+    pagesCount,
+    currentPage,
+    setCurrentPage,
+    pageNews,
+  } = usePagination(usersNews, newsLimit);
+
   const { user } = useSelector((state) => state.auth);
 
   const { id } = useParams();
@@ -134,16 +145,31 @@ function UserInfo() {
         xs={10}
         sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}
       >
-        <Typography component="div" variant="h4" sx={{ mt: 10 }}>
+        <Typography component="div" variant="h4" sx={{ mt: 2 }}>
           My Posts
         </Typography>
       </Grid>
-      {usersNews.map((news) => (
+      {pageNews.map((news) => (
         <News
           news={news}
           key={news.id}
         />
       )) }
+      <Grid
+        item
+        xs={10}
+        className="pagination"
+      >
+        <Pagination
+          count={pagesCount}
+          page={currentPage}
+          size="large"
+          color="primary"
+          onChange={(event) => setCurrentPage(Number(event.target.textContent))}
+          hidePrevButton
+          hideNextButton
+        />
+      </Grid>
     </>
   );
 }
