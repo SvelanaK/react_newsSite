@@ -24,3 +24,8 @@ export async function whoAmIApi() {
   const { data } = await instance.post('api/auth/whoAmI');
   return data;
 }
+
+export async function googleApi(body) {
+  const { data } = await instance.post('api/auth/google', body);
+  return data;
+}

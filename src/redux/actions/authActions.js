@@ -21,3 +21,7 @@ export const refreshRejected = createAction(actionTypes.REFRESH_REJECTED);
 export const whoAmIRequested = createAction(actionTypes.WHOAMI_REQUESTED);
 export const whoAmISuccess = createAction(actionTypes.WHOAMI_SUCCESS);
 export const whoAmIRejected = createAction(actionTypes.WHOAMI_REJECTED);
+
+export const googleAuthRequested = createAction(actionTypes.GOOGLE_AUTH_REQUESTED);
+export const googleAuthSuccess = createAction(actionTypes.GOOGLE_AUTH_SUCCESS);
+export const googleAuthRejected = createAction(actionTypes.GOOGLE_AUTH_REJECTED);
