@@ -1,11 +1,10 @@
-// eslint-disable-next-line camelcase
-import jwt_decode from 'jwt-decode';
+import jwtDecode from 'jwt-decode';
 
 import { googleAuthRequested } from '../redux/actions/authActions';
 
 export default function createGoogleButton(dispatch) {
   function handleCallbackResponse(response) {
-    const userObject = jwt_decode(response.credential);
+    const userObject = jwtDecode(response.credential);
     const payload = {
       firstName: userObject.given_name,
       lastName: userObject.family_name,
@@ -21,7 +20,7 @@ export default function createGoogleButton(dispatch) {
 
   /* global google */
   google.accounts.id.initialize({
-    client_id: '283460441111-g6a33jhdgb5sbc7n9mj1muc13a579kjj.apps.googleusercontent.com',
+    client_id: process.env.REACT_APP_CLIENT_ID,
     callback: handleCallbackResponse,
   });
   google.accounts.id.renderButton(

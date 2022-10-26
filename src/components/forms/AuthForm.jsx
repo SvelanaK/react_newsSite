@@ -129,13 +129,10 @@ function AuthForm({ type }) {
                 />
               </Box>
             </>
-          ) : ''}
+          ) : null}
         <Button variant="outlined" sx={{ mb: 10 }} type="submit">Сonfirm</Button>
       </Box>
-      {type === 'login'
-        ? (
-          <div id="googleButtonLogin" />
-        ) : ''}
+      {type === 'login' && <div id="googleButtonLogin" />}
       {error ? <AlertError type="auth" /> : <Box />}
     </Grid>
   );
