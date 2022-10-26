@@ -9,9 +9,12 @@ import {
   loginApi,
   logoutApi,
   whoAmIApi,
+  googleApi,
 } from '../../api/authApi';
 import actionTypes from '../actionTypes';
 import {
+  googleAuthSuccess,
+  googleAuthRejected,
   registrationSuccess,
   registrationRejected,
   loginSuccess,
@@ -66,7 +69,18 @@ function* logoutWorker() {
   }
 }
 
+function* googleAuthWorker({ payload }) {
+  try {
+    const data = yield call(googleApi, payload);
+    localStorage.setItem('accessToken', data.accessToken);
+    yield put(googleAuthSuccess(data));
+  } catch (error) {
+    yield put(googleAuthRejected(error.response.data));
+  }
+}
+
 function* authWatcher() {
+  yield takeLatest(actionTypes.GOOGLE_AUTH_REQUESTED, googleAuthWorker);
   yield takeLatest(actionTypes.REGISTRATION_REQUESTED, registrationWorker);
   yield takeLatest(actionTypes.LOGIN_REQUESTED, loginWorker);
   yield takeLatest(actionTypes.LOGOUT_REQUESTED, logoutWorker);

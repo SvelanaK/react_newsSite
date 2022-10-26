@@ -1,4 +1,6 @@
-import React, { memo, useMemo, useState } from 'react';
+import React, {
+  memo, useEffect, useMemo, useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
@@ -27,11 +29,17 @@ import {
   registrationFields,
   loginFields,
 } from '../../constants/formFields';
+import createGoogleButton from '../../utilities/googleAuth';
 
 function AuthForm({ type }) {
   const dispatch = useDispatch();
+  const { isAuth, loading, error } = useSelector((state) => state.auth);
 
   const [picture, setPicture] = useState(null);
+
+  useEffect(() => {
+    createGoogleButton(dispatch);
+  }, [loading, type]);
 
   const handleFileChange = (event) => {
     if (event.target.files) {
@@ -59,8 +67,6 @@ function AuthForm({ type }) {
       }
     },
   });
-
-  const { isAuth, loading, error } = useSelector((state) => state.auth);
 
   const authForm = useMemo(() => (type === 'registration' ? registrationFields : loginFields), [type]);
 
@@ -123,9 +129,10 @@ function AuthForm({ type }) {
                 />
               </Box>
             </>
-          ) : <Box />}
+          ) : null}
         <Button variant="outlined" sx={{ mb: 10 }} type="submit">Сonfirm</Button>
       </Box>
+      {type === 'login' && <div id="googleButtonLogin" />}
       {error ? <AlertError type="auth" /> : <Box />}
     </Grid>
   );

@@ -191,3 +191,7 @@
   bottom: 0;
   padding-bottom: 30px;
 }
+
+#googleButtonLogin {
+  margin-bottom: 40px;
+}

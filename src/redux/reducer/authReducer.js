@@ -83,6 +83,22 @@ function authReducer(state = initialState, action = {}) {
       return { ...state, error: action.payload, loading: false };
     }
 
+    case actionTypes.GOOGLE_AUTH_REQUESTED: {
+      return { ...state, error: false, loading: true };
+    }
+    case actionTypes.GOOGLE_AUTH_REJECTED: {
+      return { ...state, error: action.payload, loading: false };
+    }
+    case actionTypes.GOOGLE_AUTH_SUCCESS: {
+      return {
+        ...state,
+        user: action.payload.user,
+        isAuth: true,
+        error: false,
+        loading: false,
+      };
+    }
+
     default:
       return state;
   }
